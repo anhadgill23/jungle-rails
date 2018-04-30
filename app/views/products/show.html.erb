@@ -50,7 +50,11 @@
             <% @product.reviews.reverse_each do |review| %>
             <dd><%= review.rating %>/5 "<%= review.description %>"
 
-
+            <% if current_user %>
+              <% if review.user_id == current_user.id %>
+                  <%= link_to 'Delete', [review.product, review], class: 'btn btn-sm btn-secondary', method: :delete, data: { confirm: "Are you sure?" }%>
+              <% end%>
+            <% end %>
 
             <br></dd>
           <%end%>
