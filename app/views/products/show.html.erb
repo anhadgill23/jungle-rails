@@ -22,6 +22,39 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dt> Average Rating </dt>
+          <dd> <% if @product.reviews.size > 0 %>
+            <%= (@product.reviews.average(:rating)).round(1) %>/5
+            <% else %>
+            This product has not been rated.
+            <%end %>
+          </dd>
+            <% if current_user %>
+              <dt> Add a review: </dt> </br>
+              <%= form_for :review, url: product_reviews_path(@product.id) do |f| %>
+              <dd>
+              <%= f.label :rating %><br>
+              <%= f.select :rating, ['1', '2', '3', '4', '5'] %>
+              </dd>
+              <dd>
+              <%= f.label :description %><br>
+              <%= f.text_area :description %>
+              </dd>
+              <dd>
+              <%= f.submit %>
+              </dd>
+              <% end %>
+            <%end %>
+
+            <dt>Rating</dt>
+            <% @product.reviews.reverse_each do |review| %>
+            <dd><%= review.rating %>/5 "<%= review.description %>"
+
+
+
+            <br></dd>
+          <%end%>
+          <br>
         </dl>
       </div>
     </div>
