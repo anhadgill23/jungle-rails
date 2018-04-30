@@ -5,10 +5,10 @@ RSpec.describe Product, type: :model do
   describe 'Validations' do
     before(:each) do
       @category = Category.create(:name => 'category_name')
-      @product = Product.create(:name => 'Product',
+      @product = @category.products.create(:name => 'Product',
         :description => 'Cool product',
         :image => 'abc.jpeg',
-        :price_cents => 200,
+        :price => 200,
         :quantity => 5)
     end
 
@@ -19,32 +19,31 @@ RSpec.describe Product, type: :model do
       @product.price_cents = nil
       @product.quantity = nil
       expect(@product).to_not be_valid
-      expect(@product.error.full_messages).to include "Name cannot be empty", "Price cannot be empty", "Image cannot be empty", "Quantity cannot be empty", "Category cannot be empty"
-      expect(User.ordered_by_last_name).to eq([chelimsky, lindeman])
+      expect(@product.errors.full_messages).to include "Name can't be blank", "Price can't be blank", "Quantity can't be blank"
   end
 
     it 'should have a name' do
       @product.name = nil
       expect(@product).to_not be_valid
-      expect(@product.error.full_messages).to include "Name cannot be empty"
+      expect(@product.errors.full_messages).to include "Name can't be blank"
     end
 
     it 'should have a price' do
-      @product.price = nil
+      @product.price_cents = nil
       expect(@product).to_not be_valid
-      expect(@product.error.full_messages).to include "Price cannot be empty"
+      expect(@product.errors.full_messages).to include "Price can't be blank"
     end
 
     it 'should have a quantity' do
       @product.quantity = nil
       expect(@product).to_not be_valid
-      expect(@product.error.full_messages).to include "Quantity cannot be empty"
+      expect(@product.errors.full_messages).to include "Quantity can't be blank"
     end
 
     it 'should have a category' do
       @product.category = nil
       expect(@product).to_not be_valid
-      expect(@product.error.full_messages).to include "Category cannot be empty"
+      expect(@product.errors.full_messages).to include "Category can't be blank"
     end
   end
 end
