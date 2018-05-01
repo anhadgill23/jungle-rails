@@ -6,7 +6,7 @@ A mini e-commerce application built with Rails 4.2 for purposes of teaching Rail
 
 !["Screenshot of root page"](https://github.com/anhadgill23/jungle-rails/blob/master/docs/jungle_root.png?raw=true)
 !["Screenshot of product page"](https://github.com/anhadgill23/jungle-rails/blob/master/docs/jungle_product.png?raw=true)
-!["Screenshot of admin page"]()
+!["Screenshot of admin page"](https://github.com/anhadgill23/jungle-rails/blob/master/docs/jungle_admin.png?raw=true)
 
 ## Setup
 
