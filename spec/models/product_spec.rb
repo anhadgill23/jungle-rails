@@ -5,7 +5,8 @@ RSpec.describe Product, type: :model do
   describe 'Validations' do
     before(:each) do
       @category = Category.create(:name => 'category_name')
-      @product = @category.products.create(:name => 'Product',
+      @product = @category.products.create(
+        :name => 'Product',
         :description => 'Cool product',
         :image => 'abc.jpeg',
         :price => 200,
