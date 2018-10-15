@@ -45,19 +45,18 @@
               </dd>
               <% end %>
             <%end %>
-
-            <dt>Rating</dt>
-            <% @product.reviews.reverse_each do |review| %>
-            <dd><%= review.rating %>/5 "<%= review.description %>"
-
-            <% unless current_user.nil? %>
-              <% if review.user_id == current_user.id %>
-                  <%= link_to 'Delete', [@product, review], class: 'btn btn-sm btn-secondary', method: :delete, data: { confirm: "Are you sure?" }%>
-              <% end%>
-            <% end %>
-
-            <br></dd>
-          <%end%>
+            <% if @product.reviews.size > 0 %>
+              <dt>Review</dt>
+              <% @product.reviews.reverse_each do |review| %>
+                <dd><%= review.rating %>/5 "<%= review.description %>"
+                <% unless current_user.nil? %>
+                  <% if review.user_id == current_user.id %>
+                      <%= link_to 'Delete', [@product, review], class: 'btn btn-sm btn-secondary', method: :delete, data: { confirm: "Are you sure?" }%>
+                  <% end%>
+                <% end %>
+                <br></dd>
+              <%end%>
+            <%end%>
           <br>
         </dl>
       </div>
